@@ -1,10 +1,10 @@
-# selenium-tests/tests/test_page_not_found.py
 from test_setup import get_driver
 
-def test_404_page():
+def test_unknown_route_redirects_to_login():
     driver = get_driver()
     try:
         driver.get("http://51.21.168.187:3000/unknown-route")
-        assert "404" in driver.page_source or "Not Found" in driver.page_source or "Page Not Found" in driver.page_source
+        # check if login page elements exist
+        assert "Login" in driver.page_source or driver.find_element("id", "login-btn")
     finally:
         driver.quit()
